@@ -39,6 +39,12 @@ class Section {
             console.log(`${book.getDetails()}, Available: ${book.isAvailable}`);
              
         });
+    }; ///shows what book is available
+
+//Task 5: Handle Books Borrowing and Returning (have to put it here for it to work)
+
+calculateTotalBooksAvailable() {
+    return this.books.filter(book => book.isAvailable).length;
     };
 };
 
@@ -58,7 +64,7 @@ class Patron {
             console.log(`"${book.title}" Not Available`);
             
         }
-    }
+    }    //Logs if able to be borrowed or not
     returnBook(book) {
         const index = this.borrowedBooks.indexOf(book);
         if(index > -1){
@@ -68,33 +74,26 @@ class Patron {
         }else {
             console.log(`${this.name} have not borrowed "${book.title}"`);
         }
-    }
+    } //Logs if it was returned or if it was not borrowed
 };
 
 //Task 4: Create a VIPPatron Class that inherits from Patron
 
-class VIPPatron extends Patron {
-    constructor(name) {
-       super(name);
-       this.priority = true;
-    };
-   borrowBook(book){
-       if(book.isAvailable){
-           book.isAvailable = false;
-           this.borrowedBooks.push(book);
-           console.log(`${this.name} (VIP) has borrowed "${book.title}"`);
+class VIPPatron extends Patron{
+    constructor(name, priority) {
+        super(name);
+        this.priority = priority;
+    }
+    borrowedBook(book) {
+        if (book.isAvailable) {
+            book.isAvailable= false;
+            this.borrowedBooks.push(book);
+            console.log(`VIP ${this.name} borrowed "${book.title}"`);
        } else {
-           console.log(`Sorry, "${book.title}" is currently not available.`);
-       };
-    };
-};
-
-//Task 5: Handle Books Borrowing and Returning
-
-calculateTotalBooksAvailable() {
-    return this.books.filter(book => book.isAvailable).length;
-};
-
+        console.log(`"${book.title}" not available for VIP.`);
+       }
+    }
+}; //Checks if book is available for VIP
 
 //Task 6: Create and Manage Sections and Patrons 
 
