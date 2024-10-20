@@ -94,3 +94,48 @@ class VIPPatron extends Patron {
 calculateTotalBooksAvailable() {
     return this.books.filter(book => book.isAvailable).length;
 };
+
+
+//Task 6: Create and Manage Sections and Patrons 
+
+// Create Sections
+
+const fictionSection = new Section('Fiction');
+const nonFictionSection = new Section('Non-Fiction');
+
+
+// Create Books
+const book1 = new Book('The Great Gatsby', 'F. Scott Fitzgerald', '123456789');
+const book2 = new Book('1984', 'George Orwell', '987654321');
+const book3 = new Book('The Jungle', 'Upton Sinclair', '193038287');
+const book4 = new Book('1776', 'David McCullough', '890347821');
+
+// Add Books to Sections
+fictionSection.addBook(book1);
+fictionSection.addBook(book2);
+nonFictionSection.addBook(book3);
+nonFictionSection.addBook(book4);
+
+// Create Patrons
+const patron1 = new Patron('Hazel');
+const patron2 = new Patron('Ricky');
+const vipPatron = new VIPPatron('Timmy');
+
+// Borrow Books
+patron1.borrowBook(book1);
+patron2.borrowBook(book3);
+vipPatron.borrowBook(book2);
+
+// Return Books
+patron1.returnBook(book1);
+vipPatron.returnBook(book2);
+
+// List Books and availability
+console.log('Fiction Section Books:');
+console.log(fictionSection.listBooks());
+console.log('Non-Fiction Section Books:');
+console.log(nonFictionSection.listBooks());
+
+// Calculate Total Available Books in Each Section
+console.log(`Total available books in Fiction: ${fictionSection.calculateTotalBooksAvailable()}`);
+console.log(`Total available books in Non-Fiction: ${nonFictionSection.calculateTotalBooksAvailable()}`);
